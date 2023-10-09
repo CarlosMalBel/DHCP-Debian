@@ -99,7 +99,7 @@ cp dhcpd.conf dhcpd.conf.copia
 ![backup](img_dhcp/9.PNG)
 **(Yo pongo al final `.copia` pero puedes llamarlo, por ejemplo, `.backup` o como más quieras.)**
 
-* Bien vamos a proceder con la configuración del archivo. Para ello metemos el comando:  
+#### * Bien vamos a proceder con la configuración del archivo. Para ello metemos el comando:  
 ```
 nano dhcpd.conf
 ```  
@@ -219,4 +219,25 @@ ipconfig
 * Por ultimo comprobamos que tiene internet yendo a microsoft explorer y buscando, por ejemplo, `marca.com`.
 ![marca](img_dhcp/19.PNG)
 
+### Extra: Errores que puedan saltar.
 
+* A veces pueden darse un error en el codigo y, aunque mires y mires, puedes saltartelo pues, seguramente, el error sea una letra o una palabra mal escrita.
+
+* Para no perder tiempo, podemos mirar exactamente cual es el fallo. Por ejemplo al inicar el servidor con:
+```
+systemctl start isc-dhcp-server
+```
+* Instalare el servidor en una maquina limpia y no cofigurare nada. El error que tendria que saltar, obviamente, es que no he configurado nada, ni la red ni el ambito del servidor. 
+* Entonces al instalar el servidor con el comando:
+```
+apt install isc-dhcp-server
+```
+![server_instalacion](/img_dhcp/21.PNG)
+* E introducir el comando:
+```
+journalctl -u isc-hdcp-service.service
+```
+![fallos](/img_dhcp/25.PNG)
+* Nos saldran los errores por los que no arranca el servidor.
+![fallos](/img_dhcp/24.PNG)
+* Como solo he instalado el servidor y no he configurado nada en la parte de red pues el error que nos salta es "No subnet declaration for enp0s3 (10.0.16.41)" Lo que quiere decir que no he declaro nada en el "ambito" del servidor, ni la red ni la exclusiones, nada. Lo que tendria que hacer ahora es revisar el [archivo](#bien-vamos-a-proceder-con-la-configuración-del-archivo-para-ello-metemos-el-comando) de configuracion del servidor y arrelar el fallo. Y si no revisar la instalacion de [Debian12](#configuración-de-la-maquina-debian12).
