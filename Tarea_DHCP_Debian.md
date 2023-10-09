@@ -13,7 +13,7 @@
     + [Configuracion servidor DHCP](#configuracion-del-servidor-dhcp)
     + [Encender servidor y comprobaciones finales](#poner-en-marcha-el-servidor-y-comprobaciones-finales)
 - [Comprobacion del cliente](#comprobacion-en-el-cliente)
-
+- [Extra: Solución posibles fallos](#extra-errores-que-puedan-saltar)
 
 
 ### Enunciado:
@@ -238,6 +238,7 @@ apt install isc-dhcp-server
 journalctl -u isc-hdcp-service.service
 ```
 ![fallos](/img_dhcp/25.PNG)
-* Nos saldran los errores por los que no arranca el servidor.
+* Nos saldran los errores por los que no arranca el servidor.  
+
 ![fallos](/img_dhcp/24.PNG)
 * Como solo he instalado el servidor y no he configurado nada en la parte de red pues el error que nos salta es "No subnet declaration for enp0s3 (10.0.16.41)" Lo que quiere decir que no he declaro nada en el "ambito" del servidor, ni la red ni la exclusiones, nada. Lo que tendria que hacer ahora es revisar el [archivo](#bien-vamos-a-proceder-con-la-configuración-del-archivo-para-ello-metemos-el-comando) de configuracion del servidor y arrelar el fallo. Y si no revisar la instalacion de [Debian12](#configuración-de-la-maquina-debian12).
